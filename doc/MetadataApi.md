@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **getVersion**
-> InlineResponse2001 getVersion()
+> GetVersion200Response getVersion()
 
 Return Running Software Version.
 
@@ -25,12 +25,12 @@ This endpoint returns the version of Ory Hydra.  If the service supports TLS Edg
 ```dart
 import 'package:ory_hydra_client/api.dart';
 
-var api_instance = new MetadataApi();
+final api = OryHydraClient().getMetadataApi();
 
 try {
-    var result = api_instance.getVersion();
-    print(result);
-} catch (e) {
+    final response = api.getVersion();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling MetadataApi->getVersion: $e\n');
 }
 ```
@@ -40,7 +40,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**GetVersion200Response**](GetVersion200Response.md)
 
 ### Authorization
 
@@ -64,12 +64,12 @@ This endpoint returns a HTTP 200 status code when Ory Hydra is accepting incomin
 ```dart
 import 'package:ory_hydra_client/api.dart';
 
-var api_instance = new MetadataApi();
+final api = OryHydraClient().getMetadataApi();
 
 try {
-    var result = api_instance.isAlive();
-    print(result);
-} catch (e) {
+    final response = api.isAlive();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling MetadataApi->isAlive: $e\n');
 }
 ```
@@ -93,7 +93,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **isReady**
-> InlineResponse200 isReady()
+> IsReady200Response isReady()
 
 Check HTTP Server and Database Status
 
@@ -103,12 +103,12 @@ This endpoint returns a HTTP 200 status code when Ory Hydra is up running and th
 ```dart
 import 'package:ory_hydra_client/api.dart';
 
-var api_instance = new MetadataApi();
+final api = OryHydraClient().getMetadataApi();
 
 try {
-    var result = api_instance.isReady();
-    print(result);
-} catch (e) {
+    final response = api.isReady();
+    print(response);
+} catch on DioError (e) {
     print('Exception when calling MetadataApi->isReady: $e\n');
 }
 ```
@@ -118,7 +118,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**IsReady200Response**](IsReady200Response.md)
 
 ### Authorization
 

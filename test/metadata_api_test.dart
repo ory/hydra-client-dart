@@ -1,13 +1,5 @@
-//
-// AUTO-GENERATED FILE, DO NOT MODIFY!
-//
-// @dart=2.7
-
-// ignore_for_file: unused_import
-
-import 'package:ory_hydra_client/api.dart';
-import 'package:ory_hydra_client/api/metadata_api.dart';
 import 'package:test/test.dart';
+import 'package:ory_hydra_client/ory_hydra_client.dart';
 
 
 /// tests for MetadataApi
@@ -19,7 +11,7 @@ void main() {
     //
     // This endpoint returns the version of Ory Hydra.  If the service supports TLS Edge Termination, this endpoint does not require the `X-Forwarded-Proto` header to be set.  Be aware that if you are running multiple nodes of this service, the version will never refer to the cluster state, only to a single instance.
     //
-    //Future<InlineResponse2001> getVersion() async
+    //Future<GetVersion200Response> getVersion() async
     test('test getVersion', () async {
       // TODO
     });
@@ -37,7 +29,7 @@ void main() {
     //
     // This endpoint returns a HTTP 200 status code when Ory Hydra is up running and the environment dependencies (e.g. the database) are responsive as well.  If the service supports TLS Edge Termination, this endpoint does not require the `X-Forwarded-Proto` header to be set.  Be aware that if you are running multiple nodes of Ory Hydra, the health status will never refer to the cluster state, only to a single instance.
     //
-    //Future<InlineResponse200> isReady() async
+    //Future<IsReady200Response> isReady() async
     test('test isReady', () async {
       // TODO
     });
