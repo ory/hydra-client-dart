@@ -34,20 +34,19 @@ import 'package:ory_hydra_client/src/model/is_ready503_response.dart';
 import 'package:ory_hydra_client/src/model/json_patch.dart';
 import 'package:ory_hydra_client/src/model/json_web_key.dart';
 import 'package:ory_hydra_client/src/model/json_web_key_set.dart';
+import 'package:ory_hydra_client/src/model/keyset_pagination_request_parameters.dart';
+import 'package:ory_hydra_client/src/model/keyset_pagination_response_headers.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_client.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_client_token_lifespans.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_consent_request.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_consent_request_open_id_connect_context.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_consent_session.dart';
-import 'package:ory_hydra_client/src/model/o_auth2_consent_session_expires_at.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_login_request.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_logout_request.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_redirect_to.dart';
 import 'package:ory_hydra_client/src/model/o_auth2_token_exchange.dart';
 import 'package:ory_hydra_client/src/model/oidc_configuration.dart';
 import 'package:ory_hydra_client/src/model/oidc_user_info.dart';
-import 'package:ory_hydra_client/src/model/pagination.dart';
-import 'package:ory_hydra_client/src/model/pagination_headers.dart';
 import 'package:ory_hydra_client/src/model/rfc6749_error_json.dart';
 import 'package:ory_hydra_client/src/model/reject_o_auth2_request.dart';
 import 'package:ory_hydra_client/src/model/token_pagination.dart';
@@ -86,20 +85,19 @@ part 'serializers.g.dart';
   JsonPatch,
   JsonWebKey,
   JsonWebKeySet,
+  KeysetPaginationRequestParameters,
+  KeysetPaginationResponseHeaders,
   OAuth2Client,
   OAuth2ClientTokenLifespans,
   OAuth2ConsentRequest,
   OAuth2ConsentRequestOpenIDConnectContext,
   OAuth2ConsentSession,
-  OAuth2ConsentSessionExpiresAt,
   OAuth2LoginRequest,
   OAuth2LogoutRequest,
   OAuth2RedirectTo,
   OAuth2TokenExchange,
   OidcConfiguration,
   OidcUserInfo,
-  Pagination,
-  PaginationHeaders,
   RFC6749ErrorJson,
   RejectOAuth2Request,
   TokenPagination,

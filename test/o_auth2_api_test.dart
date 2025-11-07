@@ -155,7 +155,7 @@ void main() {
     //
     // Use this endpoint to list all trusted JWT Bearer Grant Type Issuers.
     //
-    //Future<BuiltList<TrustedOAuth2JwtGrantIssuer>> listTrustedOAuth2JwtGrantIssuers({ int maxItems, int defaultItems, String issuer }) async
+    //Future<BuiltList<TrustedOAuth2JwtGrantIssuer>> listTrustedOAuth2JwtGrantIssuers({ int pageSize, String pageToken, String issuer }) async
     test('test listTrustedOAuth2JwtGrantIssuers', () async {
       // TODO
     });
@@ -171,7 +171,7 @@ void main() {
 
     // The OAuth 2.0 Device Authorize Endpoint
     //
-    // This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exists.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
+    // This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exist.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
     //
     //Future<DeviceAuthorization> oAuth2DeviceFlow() async
     test('test oAuth2DeviceFlow', () async {
@@ -198,7 +198,7 @@ void main() {
 
     // OAuth 2.0 Device Verification Endpoint
     //
-    // This is the device user verification endpoint. The user is redirected here when trying to login using the device flow.
+    // This is the device user verification endpoint. The user is redirected here when trying to log in using the device flow.
     //
     //Future<ErrorOAuth2> performOAuth2DeviceVerificationFlow() async
     test('test performOAuth2DeviceVerificationFlow', () async {
@@ -236,7 +236,7 @@ void main() {
     //
     // This endpoint revokes a subject's granted consent sessions and invalidates all associated OAuth 2.0 Access Tokens. You may also only revoke sessions for a specific OAuth 2.0 Client ID.
     //
-    //Future revokeOAuth2ConsentSessions(String subject, { String client, bool all }) async
+    //Future revokeOAuth2ConsentSessions({ String subject, String client, String consentRequestId, bool all }) async
     test('test revokeOAuth2ConsentSessions', () async {
       // TODO
     });

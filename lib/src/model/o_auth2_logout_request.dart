@@ -12,7 +12,7 @@ part 'o_auth2_logout_request.g.dart';
 /// OAuth2LogoutRequest
 ///
 /// Properties:
-/// * [challenge] - Challenge is the identifier (\"logout challenge\") of the logout authentication request. It is used to identify the session.
+/// * [challenge] - Challenge is the identifier of the logout authentication request.
 /// * [client] 
 /// * [expiresAt] 
 /// * [requestUrl] - RequestURL is the original Logout URL requested.
@@ -22,7 +22,7 @@ part 'o_auth2_logout_request.g.dart';
 /// * [subject] - Subject is the user for whom the logout was request.
 @BuiltValue()
 abstract class OAuth2LogoutRequest implements Built<OAuth2LogoutRequest, OAuth2LogoutRequestBuilder> {
-  /// Challenge is the identifier (\"logout challenge\") of the logout authentication request. It is used to identify the session.
+  /// Challenge is the identifier of the logout authentication request.
   @BuiltValueField(wireName: r'challenge')
   String? get challenge;
 

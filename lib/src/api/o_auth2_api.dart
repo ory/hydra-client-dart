@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -1175,7 +1176,7 @@ class OAuth2Api {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<BuiltList<OAuth2Client>>> listOAuth2Clients({ 
     int? pageSize = 250,
-    String? pageToken = '1',
+    String? pageToken,
     String? clientName,
     String? owner,
     CancelToken? cancelToken,
@@ -1338,8 +1339,8 @@ class OAuth2Api {
   /// Use this endpoint to list all trusted JWT Bearer Grant Type Issuers.
   ///
   /// Parameters:
-  /// * [maxItems] 
-  /// * [defaultItems] 
+  /// * [pageSize] - Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
+  /// * [pageToken] - Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
   /// * [issuer] - If optional \"issuer\" is supplied, only jwt-bearer grants with this issuer will be returned.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1351,8 +1352,8 @@ class OAuth2Api {
   /// Returns a [Future] containing a [Response] with a [BuiltList<TrustedOAuth2JwtGrantIssuer>] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<BuiltList<TrustedOAuth2JwtGrantIssuer>>> listTrustedOAuth2JwtGrantIssuers({ 
-    int? maxItems,
-    int? defaultItems,
+    int? pageSize = 250,
+    String? pageToken,
     String? issuer,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1375,8 +1376,8 @@ class OAuth2Api {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (maxItems != null) r'MaxItems': encodeQueryParameter(_serializers, maxItems, const FullType(int)),
-      if (defaultItems != null) r'DefaultItems': encodeQueryParameter(_serializers, defaultItems, const FullType(int)),
+      if (pageSize != null) r'page_size': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      if (pageToken != null) r'page_token': encodeQueryParameter(_serializers, pageToken, const FullType(String)),
       if (issuer != null) r'issuer': encodeQueryParameter(_serializers, issuer, const FullType(String)),
     };
 
@@ -1494,7 +1495,7 @@ class OAuth2Api {
   }
 
   /// The OAuth 2.0 Device Authorize Endpoint
-  /// This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exists.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
+  /// This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exist.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -1781,7 +1782,7 @@ class OAuth2Api {
   }
 
   /// OAuth 2.0 Device Verification Endpoint
-  /// This is the device user verification endpoint. The user is redirected here when trying to login using the device flow.
+  /// This is the device user verification endpoint. The user is redirected here when trying to log in using the device flow.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -2117,6 +2118,7 @@ class OAuth2Api {
   /// Parameters:
   /// * [subject] - OAuth 2.0 Consent Subject  The subject whose consent sessions should be deleted.
   /// * [client] - OAuth 2.0 Client ID  If set, deletes only those consent sessions that have been granted to the specified OAuth 2.0 Client ID.
+  /// * [consentRequestId] - Consent Request ID  If set, revoke all token chains derived from this particular consent request ID.
   /// * [all] - Revoke All Consent Sessions  If set to `true` deletes all consent sessions by the Subject that have been granted.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -2128,8 +2130,9 @@ class OAuth2Api {
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
   Future<Response<void>> revokeOAuth2ConsentSessions({ 
-    required String subject,
+    String? subject,
     String? client,
+    String? consentRequestId,
     bool? all,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2152,8 +2155,9 @@ class OAuth2Api {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'subject': encodeQueryParameter(_serializers, subject, const FullType(String)),
+      if (subject != null) r'subject': encodeQueryParameter(_serializers, subject, const FullType(String)),
       if (client != null) r'client': encodeQueryParameter(_serializers, client, const FullType(String)),
+      if (consentRequestId != null) r'consent_request_id': encodeQueryParameter(_serializers, consentRequestId, const FullType(String)),
       if (all != null) r'all': encodeQueryParameter(_serializers, all, const FullType(bool)),
     };
 

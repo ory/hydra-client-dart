@@ -679,7 +679,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageSize** | **int**| Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination). | [optional] [default to 250]
- **pageToken** | **String**| Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination). | [optional] [default to '1']
+ **pageToken** | **String**| Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination). | [optional] 
  **clientName** | **String**| The name of the clients to filter by. | [optional] 
  **owner** | **String**| The owner of the clients to filter by. | [optional] 
 
@@ -748,7 +748,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listTrustedOAuth2JwtGrantIssuers**
-> BuiltList<TrustedOAuth2JwtGrantIssuer> listTrustedOAuth2JwtGrantIssuers(maxItems, defaultItems, issuer)
+> BuiltList<TrustedOAuth2JwtGrantIssuer> listTrustedOAuth2JwtGrantIssuers(pageSize, pageToken, issuer)
 
 List Trusted OAuth2 JWT Bearer Grant Type Issuers
 
@@ -759,12 +759,12 @@ Use this endpoint to list all trusted JWT Bearer Grant Type Issuers.
 import 'package:ory_hydra_client/api.dart';
 
 final api = OryHydraClient().getOAuth2Api();
-final int maxItems = 789; // int | 
-final int defaultItems = 789; // int | 
+final int pageSize = 789; // int | Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
+final String pageToken = pageToken_example; // String | Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
 final String issuer = issuer_example; // String | If optional \"issuer\" is supplied, only jwt-bearer grants with this issuer will be returned.
 
 try {
-    final response = api.listTrustedOAuth2JwtGrantIssuers(maxItems, defaultItems, issuer);
+    final response = api.listTrustedOAuth2JwtGrantIssuers(pageSize, pageToken, issuer);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling OAuth2Api->listTrustedOAuth2JwtGrantIssuers: $e\n');
@@ -775,8 +775,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **maxItems** | **int**|  | [optional] 
- **defaultItems** | **int**|  | [optional] 
+ **pageSize** | **int**| Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination). | [optional] [default to 250]
+ **pageToken** | **String**| Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination). | [optional] 
  **issuer** | **String**| If optional \"issuer\" is supplied, only jwt-bearer grants with this issuer will be returned. | [optional] 
 
 ### Return type
@@ -838,7 +838,7 @@ No authorization required
 
 The OAuth 2.0 Device Authorize Endpoint
 
-This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exists.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
+This endpoint is not documented here because you should never use your own implementation to perform OAuth2 flows. OAuth2 is a very popular protocol and a library for your programming language will exist.  To learn more about this flow please refer to the specification: https://tools.ietf.org/html/rfc8628
 
 ### Example
 ```dart
@@ -978,7 +978,7 @@ No authorization required
 
 OAuth 2.0 Device Verification Endpoint
 
-This is the device user verification endpoint. The user is redirected here when trying to login using the device flow.
+This is the device user verification endpoint. The user is redirected here when trying to log in using the device flow.
 
 ### Example
 ```dart
@@ -1145,7 +1145,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **revokeOAuth2ConsentSessions**
-> revokeOAuth2ConsentSessions(subject, client, all)
+> revokeOAuth2ConsentSessions(subject, client, consentRequestId, all)
 
 Revoke OAuth 2.0 Consent Sessions of a Subject
 
@@ -1158,10 +1158,11 @@ import 'package:ory_hydra_client/api.dart';
 final api = OryHydraClient().getOAuth2Api();
 final String subject = subject_example; // String | OAuth 2.0 Consent Subject  The subject whose consent sessions should be deleted.
 final String client = client_example; // String | OAuth 2.0 Client ID  If set, deletes only those consent sessions that have been granted to the specified OAuth 2.0 Client ID.
+final String consentRequestId = consentRequestId_example; // String | Consent Request ID  If set, revoke all token chains derived from this particular consent request ID.
 final bool all = true; // bool | Revoke All Consent Sessions  If set to `true` deletes all consent sessions by the Subject that have been granted.
 
 try {
-    api.revokeOAuth2ConsentSessions(subject, client, all);
+    api.revokeOAuth2ConsentSessions(subject, client, consentRequestId, all);
 } catch on DioException (e) {
     print('Exception when calling OAuth2Api->revokeOAuth2ConsentSessions: $e\n');
 }
@@ -1171,8 +1172,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subject** | **String**| OAuth 2.0 Consent Subject  The subject whose consent sessions should be deleted. | 
+ **subject** | **String**| OAuth 2.0 Consent Subject  The subject whose consent sessions should be deleted. | [optional] 
  **client** | **String**| OAuth 2.0 Client ID  If set, deletes only those consent sessions that have been granted to the specified OAuth 2.0 Client ID. | [optional] 
+ **consentRequestId** | **String**| Consent Request ID  If set, revoke all token chains derived from this particular consent request ID. | [optional] 
  **all** | **bool**| Revoke All Consent Sessions  If set to `true` deletes all consent sessions by the Subject that have been granted. | [optional] 
 
 ### Return type

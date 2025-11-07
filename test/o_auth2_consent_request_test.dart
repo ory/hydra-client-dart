@@ -18,7 +18,7 @@ void main() {
       // TODO
     });
 
-    // ID is the identifier (\"authorization challenge\") of the consent authorization request. It is used to identify the session.
+    // Challenge is used to retrieve/accept/deny the consent request.
     // String challenge
     test('to test the property `challenge`', () async {
       // TODO
@@ -29,14 +29,14 @@ void main() {
       // TODO
     });
 
-    // JsonObject context
-    test('to test the property `context`', () async {
+    // ConsentRequestID is the ID of the consent request.
+    // String consentRequestId
+    test('to test the property `consentRequestId`', () async {
       // TODO
     });
 
-    // DeviceChallenge is the device challenge this consent challenge belongs to, if this flow was initiated by a device.
-    // String deviceChallengeId
-    test('to test the property `deviceChallengeId`', () async {
+    // JsonObject context
+    test('to test the property `context`', () async {
       // TODO
     });
 

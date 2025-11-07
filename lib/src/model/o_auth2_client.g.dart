@@ -56,7 +56,7 @@ class _$OAuth2Client extends OAuth2Client {
   @override
   final String? implicitGrantIdTokenLifespan;
   @override
-  final JsonObject? jwks;
+  final JsonWebKeySet? jwks;
   @override
   final String? jwksUri;
   @override
@@ -527,9 +527,9 @@ class OAuth2ClientBuilder
   set implicitGrantIdTokenLifespan(String? implicitGrantIdTokenLifespan) =>
       _$this._implicitGrantIdTokenLifespan = implicitGrantIdTokenLifespan;
 
-  JsonObject? _jwks;
-  JsonObject? get jwks => _$this._jwks;
-  set jwks(JsonObject? jwks) => _$this._jwks = jwks;
+  JsonWebKeySetBuilder? _jwks;
+  JsonWebKeySetBuilder get jwks => _$this._jwks ??= new JsonWebKeySetBuilder();
+  set jwks(JsonWebKeySetBuilder? jwks) => _$this._jwks = jwks;
 
   String? _jwksUri;
   String? get jwksUri => _$this._jwksUri;
@@ -706,7 +706,7 @@ class OAuth2ClientBuilder
       _grantTypes = $v.grantTypes?.toBuilder();
       _implicitGrantAccessTokenLifespan = $v.implicitGrantAccessTokenLifespan;
       _implicitGrantIdTokenLifespan = $v.implicitGrantIdTokenLifespan;
-      _jwks = $v.jwks;
+      _jwks = $v.jwks?.toBuilder();
       _jwksUri = $v.jwksUri;
       _jwtBearerGrantAccessTokenLifespan = $v.jwtBearerGrantAccessTokenLifespan;
       _logoUri = $v.logoUri;
@@ -793,7 +793,7 @@ class OAuth2ClientBuilder
               implicitGrantAccessTokenLifespan:
                   implicitGrantAccessTokenLifespan,
               implicitGrantIdTokenLifespan: implicitGrantIdTokenLifespan,
-              jwks: jwks,
+              jwks: _jwks?.build(),
               jwksUri: jwksUri,
               jwtBearerGrantAccessTokenLifespan:
                   jwtBearerGrantAccessTokenLifespan,
@@ -837,6 +837,9 @@ class OAuth2ClientBuilder
 
         _$failedField = 'grantTypes';
         _grantTypes?.build();
+
+        _$failedField = 'jwks';
+        _jwks?.build();
 
         _$failedField = 'postLogoutRedirectUris';
         _postLogoutRedirectUris?.build();

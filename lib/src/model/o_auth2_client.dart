@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:ory_hydra_client/src/model/json_web_key_set.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/built_value.dart';
@@ -13,7 +14,7 @@ part 'o_auth2_client.g.dart';
 /// OAuth 2.0 Clients are used to perform OAuth 2.0 and OpenID Connect flows. Usually, OAuth 2.0 clients are generated for applications which want to consume your OAuth 2.0 or OpenID Connect capabilities.
 ///
 /// Properties:
-/// * [accessTokenStrategy] - OAuth 2.0 Access Token Strategy  AccessTokenStrategy is the strategy used to generate access tokens. Valid options are `jwt` and `opaque`. `jwt` is a bad idea, see https://www.ory.sh/docs/hydra/advanced#json-web-tokens Setting the stragegy here overrides the global setting in `strategies.access_token`.
+/// * [accessTokenStrategy] - OAuth 2.0 Access Token Strategy  AccessTokenStrategy is the strategy used to generate access tokens. Valid options are `jwt` and `opaque`. `jwt` is a bad idea, see https://www.ory.sh/docs/oauth2-oidc/jwt-access-token Setting the strategy here overrides the global setting in `strategies.access_token`.
 /// * [allowedCorsOrigins] 
 /// * [audience] 
 /// * [authorizationCodeGrantAccessTokenLifespan] - Specify a time duration in milliseconds, seconds, minutes, hours.
@@ -37,7 +38,7 @@ part 'o_auth2_client.g.dart';
 /// * [grantTypes] 
 /// * [implicitGrantAccessTokenLifespan] - Specify a time duration in milliseconds, seconds, minutes, hours.
 /// * [implicitGrantIdTokenLifespan] - Specify a time duration in milliseconds, seconds, minutes, hours.
-/// * [jwks] - OAuth 2.0 Client JSON Web Key Set  Client's JSON Web Key Set [JWK] document, passed by value. The semantics of the jwks parameter are the same as the jwks_uri parameter, other than that the JWK Set is passed by value, rather than by reference. This parameter is intended only to be used by Clients that, for some reason, are unable to use the jwks_uri parameter, for instance, by native applications that might not have a location to host the contents of the JWK Set. If a Client can use jwks_uri, it MUST NOT use jwks. One significant downside of jwks is that it does not enable key rotation (which jwks_uri does, as described in Section 10 of OpenID Connect Core 1.0 [OpenID.Core]). The jwks_uri and jwks parameters MUST NOT be used together.
+/// * [jwks] 
 /// * [jwksUri] - OAuth 2.0 Client JSON Web Key Set URL  URL for the Client's JSON Web Key Set [JWK] document. If the Client signs requests to the Server, it contains the signing key(s) the Server uses to validate signatures from the Client. The JWK Set MAY also contain the Client's encryption keys(s), which are used by the Server to encrypt responses to the Client. When both signing and encryption keys are made available, a use (Key Use) parameter value is REQUIRED for all keys in the referenced JWK Set to indicate each key's intended usage. Although some algorithms allow the same key to be used for both signatures and encryption, doing so is NOT RECOMMENDED, as it is less secure. The JWK x5c parameter MAY be used to provide X.509 representations of keys provided. When used, the bare key values MUST still be present and MUST match those in the certificate.
 /// * [jwtBearerGrantAccessTokenLifespan] - Specify a time duration in milliseconds, seconds, minutes, hours.
 /// * [logoUri] - OAuth 2.0 Client Logo URI  A URL string referencing the client's logo.
@@ -66,7 +67,7 @@ part 'o_auth2_client.g.dart';
 /// * [userinfoSignedResponseAlg] - OpenID Connect Request Userinfo Signed Response Algorithm  JWS alg algorithm [JWA] REQUIRED for signing UserInfo Responses. If this is specified, the response will be JWT [JWT] serialized, and signed using JWS. The default, if omitted, is for the UserInfo Response to return the Claims as a UTF-8 encoded JSON object using the application/json content-type.
 @BuiltValue()
 abstract class OAuth2Client implements Built<OAuth2Client, OAuth2ClientBuilder> {
-  /// OAuth 2.0 Access Token Strategy  AccessTokenStrategy is the strategy used to generate access tokens. Valid options are `jwt` and `opaque`. `jwt` is a bad idea, see https://www.ory.sh/docs/hydra/advanced#json-web-tokens Setting the stragegy here overrides the global setting in `strategies.access_token`.
+  /// OAuth 2.0 Access Token Strategy  AccessTokenStrategy is the strategy used to generate access tokens. Valid options are `jwt` and `opaque`. `jwt` is a bad idea, see https://www.ory.sh/docs/oauth2-oidc/jwt-access-token Setting the strategy here overrides the global setting in `strategies.access_token`.
   @BuiltValueField(wireName: r'access_token_strategy')
   String? get accessTokenStrategy;
 
@@ -158,9 +159,8 @@ abstract class OAuth2Client implements Built<OAuth2Client, OAuth2ClientBuilder> 
   @BuiltValueField(wireName: r'implicit_grant_id_token_lifespan')
   String? get implicitGrantIdTokenLifespan;
 
-  /// OAuth 2.0 Client JSON Web Key Set  Client's JSON Web Key Set [JWK] document, passed by value. The semantics of the jwks parameter are the same as the jwks_uri parameter, other than that the JWK Set is passed by value, rather than by reference. This parameter is intended only to be used by Clients that, for some reason, are unable to use the jwks_uri parameter, for instance, by native applications that might not have a location to host the contents of the JWK Set. If a Client can use jwks_uri, it MUST NOT use jwks. One significant downside of jwks is that it does not enable key rotation (which jwks_uri does, as described in Section 10 of OpenID Connect Core 1.0 [OpenID.Core]). The jwks_uri and jwks parameters MUST NOT be used together.
   @BuiltValueField(wireName: r'jwks')
-  JsonObject? get jwks;
+  JsonWebKeySet? get jwks;
 
   /// OAuth 2.0 Client JSON Web Key Set URL  URL for the Client's JSON Web Key Set [JWK] document. If the Client signs requests to the Server, it contains the signing key(s) the Server uses to validate signatures from the Client. The JWK Set MAY also contain the Client's encryption keys(s), which are used by the Server to encrypt responses to the Client. When both signing and encryption keys are made available, a use (Key Use) parameter value is REQUIRED for all keys in the referenced JWK Set to indicate each key's intended usage. Although some algorithms allow the same key to be used for both signatures and encryption, doing so is NOT RECOMMENDED, as it is less secure. The JWK x5c parameter MAY be used to provide X.509 representations of keys provided. When used, the bare key values MUST still be present and MUST match those in the certificate.
   @BuiltValueField(wireName: r'jwks_uri')
@@ -457,7 +457,7 @@ class _$OAuth2ClientSerializer implements PrimitiveSerializer<OAuth2Client> {
       yield r'jwks';
       yield serializers.serialize(
         object.jwks,
-        specifiedType: const FullType.nullable(JsonObject),
+        specifiedType: const FullType(JsonWebKeySet),
       );
     }
     if (object.jwksUri != null) {
@@ -836,10 +836,9 @@ class _$OAuth2ClientSerializer implements PrimitiveSerializer<OAuth2Client> {
         case r'jwks':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
-          if (valueDes == null) continue;
-          result.jwks = valueDes;
+            specifiedType: const FullType(JsonWebKeySet),
+          ) as JsonWebKeySet;
+          result.jwks.replace(valueDes);
           break;
         case r'jwks_uri':
           final valueDes = serializers.deserialize(

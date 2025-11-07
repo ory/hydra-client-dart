@@ -16,9 +16,9 @@ class _$OAuth2ConsentRequest extends OAuth2ConsentRequest {
   @override
   final OAuth2Client? client;
   @override
-  final JsonObject? context;
+  final String? consentRequestId;
   @override
-  final String? deviceChallengeId;
+  final JsonObject? context;
   @override
   final String? loginChallenge;
   @override
@@ -45,8 +45,8 @@ class _$OAuth2ConsentRequest extends OAuth2ConsentRequest {
       this.amr,
       required this.challenge,
       this.client,
+      this.consentRequestId,
       this.context,
-      this.deviceChallengeId,
       this.loginChallenge,
       this.loginSessionId,
       this.oidcContext,
@@ -77,8 +77,8 @@ class _$OAuth2ConsentRequest extends OAuth2ConsentRequest {
         amr == other.amr &&
         challenge == other.challenge &&
         client == other.client &&
+        consentRequestId == other.consentRequestId &&
         context == other.context &&
-        deviceChallengeId == other.deviceChallengeId &&
         loginChallenge == other.loginChallenge &&
         loginSessionId == other.loginSessionId &&
         oidcContext == other.oidcContext &&
@@ -96,8 +96,8 @@ class _$OAuth2ConsentRequest extends OAuth2ConsentRequest {
     _$hash = $jc(_$hash, amr.hashCode);
     _$hash = $jc(_$hash, challenge.hashCode);
     _$hash = $jc(_$hash, client.hashCode);
+    _$hash = $jc(_$hash, consentRequestId.hashCode);
     _$hash = $jc(_$hash, context.hashCode);
-    _$hash = $jc(_$hash, deviceChallengeId.hashCode);
     _$hash = $jc(_$hash, loginChallenge.hashCode);
     _$hash = $jc(_$hash, loginSessionId.hashCode);
     _$hash = $jc(_$hash, oidcContext.hashCode);
@@ -117,8 +117,8 @@ class _$OAuth2ConsentRequest extends OAuth2ConsentRequest {
           ..add('amr', amr)
           ..add('challenge', challenge)
           ..add('client', client)
+          ..add('consentRequestId', consentRequestId)
           ..add('context', context)
-          ..add('deviceChallengeId', deviceChallengeId)
           ..add('loginChallenge', loginChallenge)
           ..add('loginSessionId', loginSessionId)
           ..add('oidcContext', oidcContext)
@@ -152,14 +152,14 @@ class OAuth2ConsentRequestBuilder
       _$this._client ??= new OAuth2ClientBuilder();
   set client(OAuth2ClientBuilder? client) => _$this._client = client;
 
+  String? _consentRequestId;
+  String? get consentRequestId => _$this._consentRequestId;
+  set consentRequestId(String? consentRequestId) =>
+      _$this._consentRequestId = consentRequestId;
+
   JsonObject? _context;
   JsonObject? get context => _$this._context;
   set context(JsonObject? context) => _$this._context = context;
-
-  String? _deviceChallengeId;
-  String? get deviceChallengeId => _$this._deviceChallengeId;
-  set deviceChallengeId(String? deviceChallengeId) =>
-      _$this._deviceChallengeId = deviceChallengeId;
 
   String? _loginChallenge;
   String? get loginChallenge => _$this._loginChallenge;
@@ -215,8 +215,8 @@ class OAuth2ConsentRequestBuilder
       _amr = $v.amr?.toBuilder();
       _challenge = $v.challenge;
       _client = $v.client?.toBuilder();
+      _consentRequestId = $v.consentRequestId;
       _context = $v.context;
-      _deviceChallengeId = $v.deviceChallengeId;
       _loginChallenge = $v.loginChallenge;
       _loginSessionId = $v.loginSessionId;
       _oidcContext = $v.oidcContext?.toBuilder();
@@ -255,8 +255,8 @@ class OAuth2ConsentRequestBuilder
               challenge: BuiltValueNullFieldError.checkNotNull(
                   challenge, r'OAuth2ConsentRequest', 'challenge'),
               client: _client?.build(),
+              consentRequestId: consentRequestId,
               context: context,
-              deviceChallengeId: deviceChallengeId,
               loginChallenge: loginChallenge,
               loginSessionId: loginSessionId,
               oidcContext: _oidcContext?.build(),

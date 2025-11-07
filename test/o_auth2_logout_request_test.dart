@@ -7,7 +7,7 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(OAuth2LogoutRequest, () {
-    // Challenge is the identifier (\"logout challenge\") of the logout authentication request. It is used to identify the session.
+    // Challenge is the identifier of the logout authentication request.
     // String challenge
     test('to test the property `challenge`', () async {
       // TODO

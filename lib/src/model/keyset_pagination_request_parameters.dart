@@ -6,16 +6,16 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'pagination.g.dart';
+part 'keyset_pagination_request_parameters.g.dart';
 
-/// Pagination
+/// For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
 ///
 /// Properties:
-/// * [pageSize] - Items per page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
+/// * [pageSize] - Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
 /// * [pageToken] - Next Page Token  The next page token. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
 @BuiltValue()
-abstract class Pagination implements Built<Pagination, PaginationBuilder> {
-  /// Items per page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
+abstract class KeysetPaginationRequestParameters implements Built<KeysetPaginationRequestParameters, KeysetPaginationRequestParametersBuilder> {
+  /// Items per Page  This is the number of items per page to return. For details on pagination please head over to the [pagination documentation](https://www.ory.sh/docs/ecosystem/api-design#pagination).
   @BuiltValueField(wireName: r'page_size')
   int? get pageSize;
 
@@ -23,29 +23,28 @@ abstract class Pagination implements Built<Pagination, PaginationBuilder> {
   @BuiltValueField(wireName: r'page_token')
   String? get pageToken;
 
-  Pagination._();
+  KeysetPaginationRequestParameters._();
 
-  factory Pagination([void updates(PaginationBuilder b)]) = _$Pagination;
+  factory KeysetPaginationRequestParameters([void updates(KeysetPaginationRequestParametersBuilder b)]) = _$KeysetPaginationRequestParameters;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PaginationBuilder b) => b
-      ..pageSize = 250
-      ..pageToken = '1';
+  static void _defaults(KeysetPaginationRequestParametersBuilder b) => b
+      ..pageSize = 250;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<Pagination> get serializer => _$PaginationSerializer();
+  static Serializer<KeysetPaginationRequestParameters> get serializer => _$KeysetPaginationRequestParametersSerializer();
 }
 
-class _$PaginationSerializer implements PrimitiveSerializer<Pagination> {
+class _$KeysetPaginationRequestParametersSerializer implements PrimitiveSerializer<KeysetPaginationRequestParameters> {
   @override
-  final Iterable<Type> types = const [Pagination, _$Pagination];
+  final Iterable<Type> types = const [KeysetPaginationRequestParameters, _$KeysetPaginationRequestParameters];
 
   @override
-  final String wireName = r'Pagination';
+  final String wireName = r'KeysetPaginationRequestParameters';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
-    Pagination object, {
+    KeysetPaginationRequestParameters object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     if (object.pageSize != null) {
@@ -67,7 +66,7 @@ class _$PaginationSerializer implements PrimitiveSerializer<Pagination> {
   @override
   Object serialize(
     Serializers serializers,
-    Pagination object, {
+    KeysetPaginationRequestParameters object, {
     FullType specifiedType = FullType.unspecified,
   }) {
     return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
@@ -78,7 +77,7 @@ class _$PaginationSerializer implements PrimitiveSerializer<Pagination> {
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required PaginationBuilder result,
+    required KeysetPaginationRequestParametersBuilder result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -108,12 +107,12 @@ class _$PaginationSerializer implements PrimitiveSerializer<Pagination> {
   }
 
   @override
-  Pagination deserialize(
+  KeysetPaginationRequestParameters deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = PaginationBuilder();
+    final result = KeysetPaginationRequestParametersBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
